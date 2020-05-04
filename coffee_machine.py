@@ -49,12 +49,12 @@ def display_supplies():
     print('{0} of money'.format(machine_money))
 
 
-display_supplies()
+# display_supplies()
 
 
 def buy():
     global machine_water, machine_money, machine_milk, machine_milk, machine_beans, machine_cups
-    buy_option = int(input('What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:'))
+    buy_option = input('What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:')
     espresso_water = 250
     espresso_beans = 16
     espresso_cost = 4
@@ -69,29 +69,51 @@ def buy():
     cappuccino_beans = 12
     cappuccino_cost = 6
 
-    if buy_option == 1 and machine_water >= espresso_water and machine_beans >= espresso_beans:
+    if buy_option == '1' and machine_water >= espresso_water and machine_beans >= espresso_beans:
+        print('I have enough resources, making you a coffee!')
         machine_water -= espresso_water
         machine_beans -= espresso_beans
         machine_money += espresso_cost
         machine_cups -= 1
+    elif buy_option == '1' and machine_water < espresso_water:
+        print('Sorry, not enough water!')
+    elif buy_option == '1' and machine_beans >= espresso_beans:
+        print('Sorry, not enough beans!')
 
-    elif buy_option == 2 and machine_water >= latte_water and machine_beans >= latte_beans \
+    elif buy_option == '2' and machine_water >= latte_water and machine_beans >= latte_beans \
             and machine_milk >= latte_milk:
+        print('I have enough resources, making you a coffee!')
         machine_water -= latte_water
         machine_beans -= latte_beans
         machine_milk -= latte_milk
         machine_money += latte_cost
         machine_cups -= 1
+    elif buy_option == '2' and machine_water >= latte_water:
+        print('Sorry, not enough water!')
+    elif buy_option == '2' and machine_beans >= latte_beans:
+        print('Sorry, not enough beans!')
+    elif buy_option == '2' and machine_milk >= latte_milk:
+        print('Sorry, not enough milk!')
 
-    elif buy_option == 3 and machine_water >= cappuccino_water and machine_beans >= cappuccino_beans \
+    elif buy_option == '3' and machine_water >= cappuccino_water and machine_beans >= cappuccino_beans \
             and machine_milk >= cappuccino_milk:
+        print('I have enough resources, making you a coffee!')
         machine_water -= cappuccino_water
         machine_beans -= cappuccino_beans
         machine_milk -= cappuccino_milk
         machine_money += cappuccino_cost
         machine_cups -= 1
+    elif buy_option == '3' and machine_water >= cappuccino_water:
+        print('Sorry, not enough water!')
+    elif buy_option == '3' and machine_beans >= cappuccino_beans:
+        print('Sorry, not enough beans!')
+    elif buy_option == '3' and machine_milk >= cappuccino_milk:
+        print('Sorry, not enough milk!')
 
-    display_supplies()
+    elif buy_option == 'back':
+        pass
+
+    # display_supplies()
 
 
 def fill():
@@ -109,7 +131,7 @@ def fill():
     filled_cups = int(input('Write how many disposable cups of coffee do you want to add:\n'))
     machine_cups += filled_cups
 
-    display_supplies()
+    # display_supplies()
 
 
 def take():
@@ -117,13 +139,30 @@ def take():
     print('I gave you ${0}'.format(machine_money))
     machine_money = 0
 
-    display_supplies()
+    # display_supplies()
 
 
-action = input('Write action (buy, fill, take):')
-if action == 'buy':
-    buy()
-elif action == 'fill':
-    fill()
-elif action == 'take':
-    take()
+# action = input('Write action (buy, fill, take):')
+# if action == 'buy':
+#     buy()
+# elif action == 'fill':
+#     fill()
+# elif action == 'take':
+#     take()
+# elif action == 'remaining':
+#     display_supplies()
+# elif action == 'exit':
+#     break
+
+while True:
+    action = input('Write action (buy, fill, take, remaining, exit):')
+    if action == 'buy':
+        buy()
+    elif action == 'fill':
+        fill()
+    elif action == 'take':
+        take()
+    elif action == 'remaining':
+        display_supplies()
+    elif action == 'exit':
+        break
